@@ -11,10 +11,20 @@ function Cart({
   );
 
   return (
-    <div className="min-h-screen bg-slate-950 text-white px-10 py-10">
-      <h1 className="text-4xl font-bold">
-        Your Cart 🛒
-      </h1>
+    <div className="min-h-screen text-white px-10 py-10">
+      <div className="mb-10 text-center">
+        <p className="text-sm font-semibold uppercase tracking-[0.3em] text-emerald-400">
+          Ready To Play
+        </p>
+
+        <h1 className="mt-3 text-4xl font-black md:text-5xl">
+          Your Cart 🛒
+        </h1>
+
+        <p className="mx-auto mt-4 max-w-xl text-slate-400">
+          Review your football gear before heading to checkout.
+        </p>
+      </div>
 
       {cart.length === 0 ? (
         <p className="mt-6 text-slate-400">
@@ -25,7 +35,7 @@ function Cart({
           {cart.map((item) => (
             <div
               key={item.id}
-              className="rounded-2xl bg-slate-800 p-6"
+              className="rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-xl shadow-lg"
             >
               <h2 className="text-2xl font-bold">
                 {item.name}
@@ -38,7 +48,7 @@ function Cart({
               <div className="mt-4 flex items-center gap-4">
                 <button
                   onClick={() => handleDecreaseQuantity(item.id)}
-                  className="rounded-lg bg-slate-700 px-4 py-2"
+                  className="rounded-lg border border-white/10 bg-white/5 px-4 py-2 font-bold transition hover:bg-white/10"
                 >
                   −
                 </button>
@@ -49,13 +59,13 @@ function Cart({
 
                 <button
                   onClick={() => handleIncreaseQuantity(item.id)}
-                  className="rounded-lg bg-emerald-500 px-4 py-2"
+                  className="rounded-lg bg-emerald-400 px-4 py-2 font-bold text-slate-950 transition hover:scale-105 hover:bg-emerald-300"
                 >
                   +
                 </button>
                 <button
                     onClick={() => handleRemoveFromCart(item.id)}
-                    className="ml-4 rounded-lg bg-red-500 px-4 py-2 font-semibold hover:bg-red-600"
+                    className="ml-4 rounded-lg border border-red-400/30 bg-red-500/10 px-4 py-2 font-semibold text-red-300 transition hover:bg-red-500/20"
                 >
                     Remove
                 </button>
@@ -63,18 +73,7 @@ function Cart({
             </div>
           ))}
 
-          <div className="mt-10 border-t border-slate-700 pt-6">
-            <div className="flex items-center justify-between">
-              <h2 className="text-2xl font-bold">
-                Total
-              </h2>
-
-              <p className="text-2xl font-bold text-emerald-400">
-                ₹{totalPrice}
-              </p>
-            </div>
-          </div>
-          <div className="mt-6 rounded-2xl bg-slate-800 p-6">
+          <div className="mt-6 rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-xl shadow-lg">
             <div className="flex justify-between text-slate-300">
                 <span>Subtotal</span>
                 <span>₹{totalPrice}</span>
@@ -96,7 +95,7 @@ function Cart({
 
             <Link
                 to="/checkout"
-                className="mt-6 block w-full rounded-xl bg-emerald-500 py-4 text-center font-bold text-slate-950 hover:bg-emerald-400"
+                className="mt-6 block w-full rounded-xl bg-emerald-400 py-4 text-center font-bold text-slate-950 shadow-lg shadow-emerald-500/20 transition-all hover:scale-[1.02] hover:bg-emerald-300 active:scale-[0.98]"
             >
                 Proceed to Checkout
             </Link>

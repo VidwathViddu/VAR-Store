@@ -11,14 +11,14 @@ function OrderSuccess() {
   } = location.state || {};
 
   return (
-    <div className="min-h-screen bg-slate-950 px-6 py-20 text-white">
-      <div className="mx-auto max-w-xl rounded-2xl bg-slate-800 p-10 text-center">
+    <div className="min-h-screen px-6 py-20 text-white">
+      <div className="mx-auto max-w-xl rounded-3xl border border-white/10 bg-white/5 p-10 text-center shadow-2xl backdrop-blur-xl">
 
-        <div className="text-6xl">
+        <div className="mx-auto flex h-20 w-20 items-center justify-center rounded-2xl border border-emerald-400/20 bg-emerald-400/10 text-5xl shadow-lg shadow-emerald-500/10">
           ✅
         </div>
 
-        <h1 className="mt-6 text-4xl font-bold">
+        <h1 className="mt-6 text-4xl font-black md:text-5xl">
           Order Placed!
         </h1>
 
@@ -26,7 +26,7 @@ function OrderSuccess() {
           Thank you{ name ? `, ${name}` : ""} for shopping with VAR Store.
         </p>
 
-        <div className="mt-8 space-y-4 rounded-xl bg-slate-700 p-6 text-left">
+        <div className="mt-8 space-y-5 rounded-2xl border border-white/10 bg-black/10 p-6 text-left">
 
           <div className="flex justify-between">
             <span className="text-slate-300">
@@ -66,7 +66,7 @@ function OrderSuccess() {
 
         <Link
           to="/"
-          className="mt-8 inline-block rounded-xl bg-emerald-500 px-6 py-3 font-bold text-slate-950 hover:bg-emerald-400"
+          className="mt-8 inline-block rounded-xl bg-emerald-400 px-8 py-4 font-bold text-slate-950 shadow-lg shadow-emerald-500/20 transition-all hover:scale-105 hover:bg-emerald-300 active:scale-95"
         >
           Continue Shopping
         </Link>

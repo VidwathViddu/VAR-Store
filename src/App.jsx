@@ -75,6 +75,7 @@ function App() {
         .filter((item) => item.quantity > 0)
     );
   }
+
   function handleRemoveFromCart(productId) {
     setCart((prevCart) =>
       prevCart.filter((item) => item.id !== productId)
@@ -83,70 +84,89 @@ function App() {
 
   return (
     <BrowserRouter>
-      <div className="min-h-screen bg-slate-950">
-        <Navbar
-          cartCount={cart.reduce(
-            (total, item) => total + item.quantity,
-            0
-          )}
-        />
+      <div className="relative min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-emerald-950">
+        
+        {/* Background Glow */}
+        <div className="pointer-events-none absolute -left-40 top-20 h-96 w-96 rounded-full bg-emerald-500/10 blur-3xl" />
+        
+        <div className="pointer-events-none absolute -right-40 bottom-20 h-96 w-96 rounded-full bg-cyan-500/10 blur-3xl" />
 
-        <div className="flex items-center justify-center pt-24">
-          <Routes>
-            <Route
-              path="/"
-              element={
-                <Home handleAddToCart={handleAddToCart} />
-              }
-            />
+        {/* Main Content */}
+        <div className="relative z-10">
+          <Navbar
+            cartCount={cart.reduce(
+              (total, item) => total + item.quantity,
+              0
+            )}
+          />
 
-            <Route
-              path="/jerseys"
-              element={<Jerseys handleAddToCart={handleAddToCart}/>}
-            />
+          <div className="pt-24">
+            <Routes>
+              <Route
+                path="/"
+                element={
+                  <Home handleAddToCart={handleAddToCart} />
+                }
+              />
 
-            <Route
-              path="/boots"
-              element={<Boots />}
-            />
+              <Route
+                path="/jerseys"
+                element={
+                  <Jerseys handleAddToCart={handleAddToCart} />
+                }
+              />
 
-            <Route
-              path="/aipicks"
-              element={<AIPicks />}
-            />
+              <Route
+                path="/boots"
+                element={
+                  <Boots handleAddToCart={handleAddToCart} />
+                }
+              />
 
-            <Route
-              path="/cart"
-              element={
-                <Cart
-                  cart={cart}
-                  handleIncreaseQuantity={handleIncreaseQuantity}
-                  handleDecreaseQuantity={handleDecreaseQuantity}
-                  handleRemoveFromCart={handleRemoveFromCart}
-                />
-              }
-            />
-            <Route
-              path="/checkout"
-              element={<Checkout 
-                cart={cart}
-                setCart={setCart}
-                />
-              }
-            />
-            <Route
-              path="/order-success"
-              element={<OrderSuccess />}
-            />
-            <Route
-              path="/product/:id"
-              element={
-                <ProductDetails
-                  handleAddToCart={handleAddToCart}
-                />
-              }
-            />
-          </Routes>
+              <Route
+                path="/aipicks"
+                element={
+                  <AIPicks handleAddToCart={handleAddToCart} />
+                }
+              />
+
+              <Route
+                path="/cart"
+                element={
+                  <Cart
+                    cart={cart}
+                    handleIncreaseQuantity={handleIncreaseQuantity}
+                    handleDecreaseQuantity={handleDecreaseQuantity}
+                    handleRemoveFromCart={handleRemoveFromCart}
+                  />
+                }
+              />
+
+              <Route
+                path="/checkout"
+                element={
+                  <Checkout
+                    cart={cart}
+                    setCart={setCart}
+                  />
+                }
+              />
+
+              <Route
+                path="/order-success"
+                element={<OrderSuccess />}
+              />
+
+              <Route
+                path="/product/:id"
+                element={
+                  <ProductDetails
+                    handleAddToCart={handleAddToCart}
+                  />
+                }
+              />
+            </Routes>
+          </div>
         </div>
       </div>
     </BrowserRouter>

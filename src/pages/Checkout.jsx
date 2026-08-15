@@ -13,7 +13,18 @@ function Checkout({ cart, setCart}) {
     payment: "Cash on Delivery",
   });
   const navigate = useNavigate();
+  const [error, setError] = useState("");
   function handlePlaceOrder() {
+    if (
+    customer.name.trim() === "" ||
+    customer.email.trim() === "" ||
+    customer.address.trim() === ""
+  ) {
+    setError("Please fill in all delivery details.");
+    return;
+  }
+
+  setError("");
     const orderId =
         "VAR-" + Math.random().toString(36).substring(2, 8).toUpperCase();
 
@@ -37,17 +48,27 @@ function Checkout({ cart, setCart}) {
   }));
 }
   return (
-    <div className="min-h-screen bg-slate-950 px-6 py-10 text-white">
+    <div className="min-h-screen px-6 py-10 text-white">
       <div className="mx-auto max-w-6xl">
 
-        <h1 className="text-4xl font-bold">
-          Checkout 💳
-        </h1>
+        <div className="mb-10 text-center">
+          <p className="text-sm font-semibold uppercase tracking-[0.3em] text-emerald-400">
+            Almost There
+          </p>
+
+          <h1 className="mt-3 text-4xl font-black md:text-5xl">
+            Checkout 💳
+          </h1>
+
+          <p className="mx-auto mt-4 max-w-xl text-slate-400">
+            Complete your details and get your football gear on its way.
+          </p>
+        </div>
 
         <div className="mt-10 grid gap-8 md:grid-cols-2">
 
           {/* Customer Details */}
-          <div className="rounded-2xl bg-slate-800 p-8">
+          <div className="rounded-2xl border border-white/10 bg-white/5 p-8 backdrop-blur-xl shadow-lg">
             <h2 className="text-2xl font-bold">
               Delivery Details
             </h2>
@@ -65,7 +86,7 @@ function Checkout({ cart, setCart}) {
                     value={customer.name}
                     onChange={handleChange}
                     placeholder="Enter your name"
-                    className="w-full rounded-xl bg-slate-700 px-4 py-3 outline-none"
+                    className="w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-white outline-none transition focus:border-emerald-400/50 focus:bg-white/10"
                 />
               </div>
 
@@ -80,7 +101,7 @@ function Checkout({ cart, setCart}) {
                     value={customer.email}
                     onChange={handleChange}
                     placeholder="Enter your email"
-                    className="w-full rounded-xl bg-slate-700 px-4 py-3 outline-none"
+                    className="w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-white outline-none transition focus:border-emerald-400/50 focus:bg-white/10"
                 />
               </div>
 
@@ -95,7 +116,7 @@ function Checkout({ cart, setCart}) {
                     onChange={handleChange}
                     placeholder="Enter your delivery address"
                     rows="4"
-                    className="w-full rounded-xl bg-slate-700 px-4 py-3 outline-none"
+                    className="w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-white outline-none transition focus:border-emerald-400/50 focus:bg-white/10"
                 />
               </div>
 
@@ -108,11 +129,19 @@ function Checkout({ cart, setCart}) {
                     name="payment"
                     value={customer.payment}
                     onChange={handleChange}
-                    className="w-full rounded-xl bg-slate-700 px-4 py-3 outline-none"
+                    className="w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-white outline-none transition focus:border-emerald-400/50 focus:bg-white/10"
                     >
-                    <option>Cash on Delivery</option>
-                    <option>UPI</option>
-                    <option>Credit / Debit Card</option>
+                    <option className="bg-slate-900 text-white">
+                      Cash on Delivery
+                    </option>
+
+                    <option className="bg-slate-900 text-white">
+                      UPI
+                    </option>
+
+                    <option className="bg-slate-900 text-white">
+                      Credit / Debit Card
+                    </option>
                 </select>
               </div>
 
@@ -158,11 +187,16 @@ function Checkout({ cart, setCart}) {
               </div>
             </div>
 
+            {error && (
+              <p className="mt-4 rounded-xl border border-red-400/20 bg-red-500/10 px-4 py-3 text-sm text-red-300">
+                ⚠️ {error}
+              </p>
+            )}
             <button
-                onClick={handlePlaceOrder}
-                className="mt-8 w-full rounded-xl bg-emerald-500 py-4 font-bold text-slate-950 hover:bg-emerald-400"
+              onClick={handlePlaceOrder}
+              className="mt-8 w-full rounded-xl bg-emerald-400 py-4 font-bold text-slate-950 shadow-lg shadow-emerald-500/20 transition-all hover:scale-[1.02] hover:bg-emerald-300 active:scale-[0.98]"
             >
-                Place Order
+              Place Order
             </button>
           </div>
 
