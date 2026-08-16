@@ -7,7 +7,7 @@ function FeaturedProducts({ handleAddToCart }) {
   return (
     <section
       id="featured-products"
-      className="py-20 text-white"
+      className="w-full py-20 text-white"
     >
       <div className="mx-auto max-w-7xl px-6">
         <div className="mb-12 text-center">

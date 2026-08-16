@@ -8,7 +8,7 @@ function Hero(props) {
   }
 
   return (
-    <section className="relative flex min-h-[65vh] flex-col items-center justify-center overflow-hidden px-6 text-center text-white">
+    <section className="relative flex w-full min-h-[65vh] flex-col items-center justify-center overflow-hidden px-6 text-center text-white">
       <div className="pointer-events-none absolute h-72 w-72 rounded-full bg-emerald-400/10 blur-3xl" />
 
       <div className="relative z-10">

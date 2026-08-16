@@ -84,7 +84,7 @@ function App() {
 
   return (
     <BrowserRouter>
-      <div className="relative min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-emerald-950">
+      <div className="relative min-h-screen w-screen max-w-none overflow-x-hidden bg-gradient-to-br from-slate-950 via-slate-900 to-emerald-950">
         
         {/* Background Glow */}
         <div className="pointer-events-none absolute -left-40 top-20 h-96 w-96 rounded-full bg-emerald-500/10 blur-3xl" />
@@ -100,7 +100,7 @@ function App() {
             )}
           />
 
-          <div className="pt-24">
+          <div className="w-full pt-24">
             <Routes>
               <Route
                 path="/"
