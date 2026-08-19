@@ -165,9 +165,18 @@ function Checkout({ cart, setCart}) {
                       {item.name}
                     </p>
 
-                    <p className="text-sm text-slate-400">
-                      Qty: {item.quantity}
-                    </p>
+                    <div className="mt-1 text-sm text-slate-400">
+                      <p>Qty: {item.quantity}</p>
+
+                      {item.size && (
+                        <p>
+                          Size:{" "}
+                          <span className="font-semibold text-white">
+                            {item.size}
+                          </span>
+                        </p>
+                      )}
+                    </div>
                   </div>
 
                   <p>

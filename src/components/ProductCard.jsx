@@ -1,10 +1,13 @@
 import { Link } from "react-router-dom";
 
-function ProductCard({ product, handleAddToCart }) {
+function ProductCard({ product }) {
   return (
     <div className="group overflow-hidden rounded-3xl border border-white/10 bg-white/5 text-white shadow-xl backdrop-blur-xl transition-all duration-500 hover:-translate-y-2 hover:border-emerald-400/40 hover:shadow-emerald-500/10">
-
-      <Link to={`/product/${product.id}`} className="block overflow-hidden">
+      
+      <Link
+        to={`/product/${product.id}`}
+        className="block overflow-hidden"
+      >
         <img
           src={product.image}
           alt={product.name}
@@ -27,17 +30,16 @@ function ProductCard({ product, handleAddToCart }) {
         </div>
 
         <p className="mt-4 text-2xl font-bold text-emerald-400">
-          ₹{product.price}
+          ₹{product.price.toLocaleString()}
         </p>
 
-        <button
-          onClick={() => handleAddToCart(product)}
-          className="mt-6 w-full rounded-xl bg-emerald-400 py-3 font-bold text-slate-950 shadow-lg shadow-emerald-500/20 transition-all duration-300 hover:scale-[1.02] hover:bg-emerald-300 hover:shadow-emerald-400/30 active:scale-95"
+        <Link
+          to={`/product/${product.id}`}
+          className="mt-6 block w-full rounded-xl bg-emerald-400 py-3 text-center font-bold text-slate-950 shadow-lg shadow-emerald-500/20 transition-all duration-300 hover:scale-[1.02] hover:bg-emerald-300 hover:shadow-emerald-400/30 active:scale-95"
         >
-          Add to Cart 🛒
-        </button>
+          View Details & Select Size →
+        </Link>
       </div>
-
     </div>
   );
 }

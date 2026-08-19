@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { useState } from "react";
 
 import Navbar from "./components/Navbar";
+import AIManager from "./components/AIManager";
 
 import Home from "./pages/Home";
 import Jerseys from "./pages/Jerseys";
@@ -13,20 +14,28 @@ import OrderSuccess from "./pages/OrderSuccess";
 import ProductDetails from "./pages/ProductDetails";
 
 function App() {
+  
   const [cart, setCart] = useState([]);
+  const [restartTutorial, setRestartTutorial] = useState(false);
 
   function handleAddToCart(product) {
     setCart((prevCart) => {
       const existingProduct = prevCart.find(
-        (item) => item.id === product.id
+        (item) =>
+          item.id === product.id &&
+          item.size === product.size
       );
 
       if (existingProduct) {
         return prevCart.map((item) => {
-          if (item.id === product.id) {
+          if (
+            item.id === product.id &&
+            item.size === product.size
+          ) {
             return {
               ...item,
-              quantity: item.quantity + 1,
+              quantity:
+                item.quantity + (product.quantity || 1),
             };
           }
 
@@ -38,16 +47,19 @@ function App() {
         ...prevCart,
         {
           ...product,
-          quantity: 1,
+          quantity: product.quantity || 1,
         },
       ];
     });
   }
 
-  function handleIncreaseQuantity(productId) {
+  function handleIncreaseQuantity(productId, size) {
     setCart((prevCart) =>
       prevCart.map((item) => {
-        if (item.id === productId) {
+        if (
+          item.id === productId &&
+          item.size === size
+        ) {
           return {
             ...item,
             quantity: item.quantity + 1,
@@ -59,11 +71,14 @@ function App() {
     );
   }
 
-  function handleDecreaseQuantity(productId) {
+  function handleDecreaseQuantity(productId, size) {
     setCart((prevCart) =>
       prevCart
         .map((item) => {
-          if (item.id === productId) {
+          if (
+            item.id === productId &&
+            item.size === size
+          ) {
             return {
               ...item,
               quantity: item.quantity - 1,
@@ -76,32 +91,49 @@ function App() {
     );
   }
 
-  function handleRemoveFromCart(productId) {
+  function handleRemoveFromCart(productId, size) {
     setCart((prevCart) =>
-      prevCart.filter((item) => item.id !== productId)
+      prevCart.filter(
+        (item) =>
+          !(
+            item.id === productId &&
+            item.size === size
+          )
+      )
     );
   }
+
+  function handleRestartTutorial() {
+  localStorage.removeItem("var-tutorial-completed");
+
+  setRestartTutorial((previousValue) => !previousValue);
+}
 
   return (
     <BrowserRouter>
       <div className="relative min-h-screen w-screen max-w-none overflow-x-hidden bg-gradient-to-br from-slate-950 via-slate-900 to-emerald-950">
-        
+
         {/* Background Glow */}
         <div className="pointer-events-none absolute -left-40 top-20 h-96 w-96 rounded-full bg-emerald-500/10 blur-3xl" />
-        
+
         <div className="pointer-events-none absolute -right-40 bottom-20 h-96 w-96 rounded-full bg-cyan-500/10 blur-3xl" />
 
         {/* Main Content */}
         <div className="relative z-10">
+
+          <AIManager key={restartTutorial ? "restart-1" : "restart-0"} />
+
           <Navbar
             cartCount={cart.reduce(
               (total, item) => total + item.quantity,
               0
             )}
+            handleRestartTutorial={handleRestartTutorial}
           />
 
           <div className="w-full pt-24">
             <Routes>
+
               <Route
                 path="/"
                 element={
@@ -165,6 +197,7 @@ function App() {
                   />
                 }
               />
+
             </Routes>
           </div>
         </div>

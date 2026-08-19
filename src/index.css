@@ -1,5 +1,25 @@
 @import "tailwindcss";
 
+.tour-highlight {
+  position: relative !important;
+  z-index: 101 !important;
+  outline: 3px solid #34d399 !important;
+  outline-offset: 6px;
+  border-radius: 12px;
+  box-shadow: 0 0 20px #34d399, 0 0 45px rgba(52, 211, 153, 0.6) !important;
+  animation: tourPulse 1.2s infinite;
+}
+
+@keyframes tourPulse {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.05);
+  }
+}
 html,
 body,
 #root {
