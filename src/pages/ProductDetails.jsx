@@ -370,209 +370,209 @@ function ProductDetails({ handleAddToCart }) {
               : "Select a Size First"}
           </button>
 
-          {/* ======================================
-              AI TRY-ON
-          ====================================== */}
+{/* ======================================
+    AI TRY-ON
+====================================== */}
 
-          {product.category === "jersey" && (
-            <div className="mt-6 rounded-3xl border border-purple-400/20 bg-purple-400/5 p-5">
+{product.category === "jersey" && (
+  <div className="mt-6 rounded-3xl border border-purple-400/20 bg-purple-400/5 p-5">
 
-              {/* Header */}
+    {/* ==================================
+        HEADER
+    ================================== */}
 
-              <div>
+    <div>
+      <div className="flex items-center gap-2">
+        <span className="rounded-full border border-purple-400/30 bg-purple-400/10 px-3 py-1 text-xs font-bold text-purple-300">
+          AI
+        </span>
 
-                <div className="flex items-center gap-2">
-                  <span className="rounded-full border border-purple-400/30 bg-purple-400/10 px-3 py-1 text-xs font-bold text-purple-300">
-                    AI
-                  </span>
+        <p className="text-xs font-bold uppercase tracking-[0.25em] text-purple-300">
+          Powered by IDM-VTON
+        </p>
+      </div>
 
-                  <p className="text-xs font-bold uppercase tracking-[0.25em] text-purple-300">
-                    Powered by IDM-VTON
-                  </p>
-                </div>
+      <h2 className="mt-3 text-2xl font-black text-white">
+        ✨ AI Try-On
+      </h2>
 
-                <h2 className="mt-3 text-2xl font-black text-white">
-                  ✨ AI Try-On
-                </h2>
+      <p className="mt-2 text-sm leading-6 text-slate-400">
+        Upload a photo of yourself and see how this jersey could look on you.
+      </p>
+    </div>
 
-                <p className="mt-2 text-sm leading-6 text-slate-400">
-                  Upload a photo of yourself and
-                  see how this jersey could look
-                  on you.
-                </p>
+    {/* ==================================
+        UPLOAD
+    ================================== */}
 
-              </div>
+    {!userImagePreview && (
+      <label className="mt-5 flex cursor-pointer flex-col items-center justify-center rounded-2xl border border-dashed border-purple-400/40 bg-purple-400/5 px-6 py-8 text-center transition hover:border-purple-300/70 hover:bg-purple-400/10">
 
-              {/* ==================================
-                  UPLOAD
-              ================================== */}
+        <span className="text-3xl">
+          📸
+        </span>
 
-              {!userImagePreview && (
-                <label className="mt-5 flex cursor-pointer flex-col items-center justify-center rounded-2xl border border-dashed border-purple-400/40 bg-purple-400/5 px-6 py-8 text-center transition hover:border-purple-300/70 hover:bg-purple-400/10">
+        <span className="mt-3 font-bold text-white">
+          Upload Your Photo
+        </span>
 
-                  <span className="text-3xl">
-                    📸
-                  </span>
+        <span className="mt-1 text-xs text-slate-500">
+          JPG, PNG or WEBP • Max 10MB
+        </span>
 
-                  <span className="mt-3 font-bold text-white">
-                    Upload Your Photo
-                  </span>
+        <input
+          type="file"
+          accept="image/png,image/jpeg,image/webp"
+          onChange={handleImageSelect}
+          className="hidden"
+        />
 
-                  <span className="mt-1 text-xs text-slate-500">
-                    JPG, PNG or WEBP • Max 10MB
-                  </span>
+      </label>
+    )}
 
-                  <input
-                    type="file"
-                    accept="image/png,image/jpeg,image/webp"
-                    onChange={handleImageSelect}
-                    className="hidden"
-                  />
+    {/* ==================================
+        PHOTO PREVIEW
+    ================================== */}
 
-                </label>
-              )}
+    {userImagePreview && !tryOnImage && (
+      <div className="mt-5">
 
-              {/* ==================================
-                  PHOTO PREVIEW
-              ================================== */}
+        <div className="flex aspect-[4/3] w-full items-center justify-center overflow-hidden rounded-2xl border border-white/10 bg-slate-900/50">
 
-              {userImagePreview &&
-                !tryOnImage && (
-                  <div className="mt-5">
+          <img
+            src={userImagePreview}
+            alt="Your uploaded photo"
+            className="h-full w-full object-contain"
+          />
 
-                    <div className="relative overflow-hidden rounded-2xl border border-white/10">
-                      <img
-                        src={userImagePreview}
-                        alt="Your uploaded photo"
-                        className="max-h-96 w-full object-contain"
-                      />
-                    </div>
+        </div>
 
-                    <div className="mt-4 flex gap-3">
+        <div className="mt-4 flex gap-3">
 
-                      <button
-                        onClick={handleTryOn}
-                        disabled={isTryingOn}
-                        className="flex-1 rounded-xl bg-purple-400 py-3 font-bold text-slate-950 transition hover:bg-purple-300 disabled:cursor-not-allowed disabled:opacity-50"
-                      >
-                        {isTryingOn
-                          ? "Creating Your Look..."
-                          : "✨ Try It On"}
-                      </button>
+          <button
+            onClick={handleTryOn}
+            disabled={isTryingOn}
+            className="flex-1 rounded-xl bg-purple-400 py-3 font-bold text-slate-950 transition hover:bg-purple-300 disabled:cursor-not-allowed disabled:opacity-50"
+          >
+            {isTryingOn
+              ? "Creating Your Look..."
+              : "✨ Try It On"}
+          </button>
 
-                      <button
-                        onClick={handleRemovePhoto}
-                        disabled={isTryingOn}
-                        className="rounded-xl border border-white/10 bg-white/5 px-4 font-semibold text-slate-300 transition hover:bg-white/10"
-                      >
-                        Change
-                      </button>
+          <button
+            onClick={handleRemovePhoto}
+            disabled={isTryingOn}
+            className="rounded-xl border border-white/10 bg-white/5 px-4 font-semibold text-slate-300 transition hover:bg-white/10 disabled:opacity-50"
+          >
+            Change
+          </button>
 
-                    </div>
+        </div>
 
-                  </div>
-                )}
+      </div>
+    )}
 
-              {/* ==================================
-                  LOADING
-              ================================== */}
+    {/* ==================================
+        LOADING
+    ================================== */}
 
-              {isTryingOn && (
-                <div className="mt-5 rounded-2xl border border-purple-400/20 bg-purple-400/5 p-6 text-center">
+    {isTryingOn && (
+      <div className="mt-5 rounded-2xl border border-purple-400/20 bg-purple-400/5 p-6 text-center">
 
-                  <div className="mx-auto h-10 w-10 animate-spin rounded-full border-4 border-purple-400/20 border-t-purple-400" />
+        <div className="mx-auto h-10 w-10 animate-spin rounded-full border-4 border-purple-400/20 border-t-purple-400" />
 
-                  <p className="mt-4 font-bold text-white">
-                    IDM-VTON is creating your look... ✨
-                  </p>
+        <p className="mt-4 font-bold text-white">
+          IDM-VTON is creating your look... ✨
+        </p>
 
-                  <p className="mt-2 text-sm text-slate-400">
-                    This may take a little while.
-                  </p>
+        <p className="mt-2 text-sm text-slate-400">
+          This may take a little while.
+        </p>
 
-                </div>
-              )}
+      </div>
+    )}
 
-              {/* ==================================
-                  RESULT
-              ================================== */}
+    {/* ==================================
+        RESULT
+    ================================== */}
 
-              {tryOnImage &&
-                !isTryingOn && (
-                  <div className="mt-5">
+    {tryOnImage && !isTryingOn && (
+      <div className="mt-5">
 
-                    <div className="mb-4 flex items-center justify-between">
+        <div className="mb-4">
 
-                      <div>
-                        <p className="text-xs font-bold uppercase tracking-[0.2em] text-purple-300">
-                          Your AI Look
-                        </p>
+          <p className="text-xs font-bold uppercase tracking-[0.2em] text-purple-300">
+            Your AI Look
+          </p>
 
-                        <h3 className="mt-1 text-xl font-black text-white">
-                          {product.name}
-                        </h3>
-                      </div>
+          <h3 className="mt-1 text-xl font-black text-white">
+            {product.name}
+          </h3>
 
-                    </div>
+        </div>
 
-                    <div className="overflow-hidden rounded-2xl border border-purple-400/30 shadow-lg shadow-purple-500/10">
+        {/* FIXED RESULT FRAME */}
 
-                      <img
-                        src={tryOnImage}
-                        alt={`AI try-on of ${product.name}`}
-                        className="w-full object-contain"
-                      />
+        <div className="flex aspect-[4/3] w-full items-center justify-center overflow-hidden rounded-2xl border border-purple-400/30 bg-white shadow-lg shadow-purple-500/10">
 
-                    </div>
+          <img
+            src={tryOnImage}
+            alt={`AI try-on of ${product.name}`}
+            className="h-full w-full object-contain"
+          />
 
-                    {/* Attribution */}
+        </div>
 
-                    <p className="mt-3 text-center text-xs text-slate-500">
-                      ✨ Virtual try-on powered by IDM-VTON
-                    </p>
+        {/* ATTRIBUTION */}
 
-                    <div className="mt-4 flex gap-3">
+        <p className="mt-3 text-center text-xs text-slate-500">
+          ✨ Virtual try-on powered by IDM-VTON
+        </p>
 
-                      <label className="flex-1 cursor-pointer rounded-xl border border-white/10 bg-white/5 py-3 text-center font-semibold text-slate-300 transition hover:bg-white/10">
+        {/* ACTIONS */}
 
-                        📸 Try Another Photo
+        <div className="mt-4 flex gap-3">
 
-                        <input
-                          type="file"
-                          accept="image/png,image/jpeg,image/webp"
-                          onChange={handleImageSelect}
-                          className="hidden"
-                        />
+          <label className="flex-1 cursor-pointer rounded-xl border border-white/10 bg-white/5 py-3 text-center font-semibold text-slate-300 transition hover:bg-white/10">
 
-                      </label>
+            📸 Try Another Photo
 
-                      <button
-                        onClick={() => {
-                          setTryOnImage("");
-                          setTryOnError("");
-                        }}
-                        className="rounded-xl border border-purple-400/30 bg-purple-400/10 px-4 font-semibold text-purple-300 transition hover:bg-purple-400/20"
-                      >
-                        Try Again
-                      </button>
+            <input
+              type="file"
+              accept="image/png,image/jpeg,image/webp"
+              onChange={handleImageSelect}
+              className="hidden"
+            />
 
-                    </div>
+          </label>
 
-                  </div>
-                )}
+          <button
+            onClick={() => {
+              setTryOnImage("");
+              setTryOnError("");
+            }}
+            className="rounded-xl border border-purple-400/30 bg-purple-400/10 px-4 font-semibold text-purple-300 transition hover:bg-purple-400/20"
+          >
+            Try Again
+          </button>
 
-              {/* ==================================
-                  ERROR
-              ================================== */}
+        </div>
 
-              {tryOnError && (
-                <div className="mt-4 rounded-xl border border-red-400/20 bg-red-500/10 px-4 py-3 text-sm text-red-300">
-                  ⚠️ {tryOnError}
-                </div>
-              )}
+      </div>
+    )}
 
-            </div>
-          )}
+    {/* ==================================
+        ERROR
+    ================================== */}
+
+    {tryOnError && (
+      <div className="mt-4 rounded-xl border border-red-400/20 bg-red-500/10 px-4 py-3 text-sm text-red-300">
+        ⚠️ {tryOnError}
+      </div>
+    )}
+
+  </div>
+)}
 
         </div>
       </div>

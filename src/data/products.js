@@ -1,4 +1,4 @@
-export const jerseys = [
+const jerseyBase = [
   // =========================
   // EXISTING JERSEYS
   // =========================
@@ -609,6 +609,91 @@ export const jerseys = [
       "https://www.maxmaillots.top/images/as-roma-2000-2001-retro-shirt-home-cfb3-max.png",
   },
 ];
+
+// =====================================================
+// JERSEY METADATA
+// =====================================================
+
+const jerseyMetadata = {
+  1:  { league: "La Liga", team: "Barcelona", type: "Current", player: "Messi" },
+  2:  { league: "La Liga", team: "Barcelona", type: "Current", player: "" },
+  3:  { league: "International", team: "Argentina", type: "Current", player: "Messi" },
+  4:  { league: "International", team: "Portugal", type: "Current", player: "Cristiano Ronaldo" },
+  5:  { league: "International", team: "Brazil", type: "Current", player: "" },
+  6:  { league: "International", team: "France", type: "Current", player: "" },
+
+  // La Liga
+  7:  { league: "La Liga", team: "Real Madrid", type: "Current", player: "" },
+  8:  { league: "La Liga", team: "Barcelona", type: "Current", player: "" },
+  9:  { league: "La Liga", team: "Atletico Madrid", type: "Current", player: "" },
+  10: { league: "La Liga", team: "Athletic Club", type: "Current", player: "" },
+
+  // Premier League
+  11: { league: "Premier League", team: "Arsenal", type: "Current", player: "" },
+  12: { league: "Premier League", team: "Liverpool", type: "Current", player: "" },
+  13: { league: "Premier League", team: "Manchester City", type: "Current", player: "" },
+  14: { league: "Premier League", team: "Chelsea", type: "Current", player: "" },
+  15: { league: "Premier League", team: "Manchester United", type: "Current", player: "" },
+  16: { league: "Premier League", team: "Tottenham Hotspur", type: "Current", player: "" },
+
+  // Serie A
+  17: { league: "Serie A", team: "Inter Milan", type: "Current", player: "" },
+  18: { league: "Serie A", team: "Juventus", type: "Current", player: "" },
+  19: { league: "Serie A", team: "AC Milan", type: "Current", player: "" },
+  20: { league: "Serie A", team: "Napoli", type: "Current", player: "" },
+
+  // Bundesliga
+  21: { league: "Bundesliga", team: "Bayern Munich", type: "Current", player: "" },
+  22: { league: "Bundesliga", team: "Borussia Dortmund", type: "Current", player: "" },
+  23: { league: "Bundesliga", team: "Bayer Leverkusen", type: "Current", player: "" },
+
+  // Ligue 1
+  24: { league: "Ligue 1", team: "Paris Saint-Germain", type: "Current", player: "" },
+  25: { league: "Ligue 1", team: "Olympique Marseille", type: "Current", player: "" },
+  26: { league: "Ligue 1", team: "AS Monaco", type: "Current", player: "" },
+
+  // Saudi Pro League
+  27: { league: "Saudi Pro League", team: "Al Nassr", type: "Current", player: "Cristiano Ronaldo" },
+  28: { league: "Saudi Pro League", team: "Al Hilal", type: "Current", player: "" },
+  29: { league: "Saudi Pro League", team: "Al Ittihad", type: "Current", player: "" },
+
+  // International
+  30: { league: "International", team: "Argentina", type: "Current", player: "Messi" },
+  31: { league: "International", team: "Brazil", type: "Current", player: "" },
+  32: { league: "International", team: "France", type: "Current", player: "" },
+  33: { league: "International", team: "Spain", type: "Current", player: "" },
+  34: { league: "International", team: "Germany", type: "Current", player: "" },
+  35: { league: "International", team: "Netherlands", type: "Current", player: "" },
+  36: { league: "International", team: "Portugal", type: "Current", player: "Cristiano Ronaldo" },
+  37: { league: "International", team: "Italy", type: "Current", player: "" },
+
+  // Greatest Players / Retro
+  38: { league: "La Liga", team: "Barcelona", type: "Retro", player: "Messi" },
+  39: { league: "International", team: "Portugal", type: "Retro", player: "Cristiano Ronaldo" },
+  40: { league: "International", team: "Brazil", type: "Retro", player: "Pele" },
+  41: { league: "International", team: "Argentina", type: "Retro", player: "Maradona" },
+  42: { league: "International", team: "France", type: "Retro", player: "Zidane" },
+  43: { league: "International", team: "Brazil", type: "Retro", player: "Ronaldinho" },
+  44: { league: "International", team: "Brazil", type: "Retro", player: "Ronaldo Nazario" },
+  45: { league: "International", team: "Netherlands", type: "Retro", player: "Johan Cruyff" },
+  46: { league: "International", team: "Spain", type: "Retro", player: "Andres Iniesta" },
+  47: { league: "International", team: "Spain", type: "Retro", player: "Xavi" },
+
+  // Retro Serie A
+  48: { league: "Serie A", team: "AC Milan", type: "Retro", player: "" },
+  49: { league: "Serie A", team: "Inter Milan", type: "Retro", player: "" },
+  50: { league: "Serie A", team: "Juventus", type: "Retro", player: "" },
+  51: { league: "Serie A", team: "AS Roma", type: "Retro", player: "" },
+};
+
+// Add metadata automatically
+export const jerseys = jerseyBase.map((jersey) => ({
+  ...jersey,
+  league: jerseyMetadata[jersey.id]?.league || "Other",
+  team: jerseyMetadata[jersey.id]?.team || "Other",
+  type: jerseyMetadata[jersey.id]?.type || "Current",
+  player: jerseyMetadata[jersey.id]?.player || "",
+}));
 
 export const boots = [
   {

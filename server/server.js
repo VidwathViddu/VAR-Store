@@ -8,7 +8,7 @@ import { Client, handle_file } from "@gradio/client";
 dotenv.config();
 
 const app = express();
-const port = 5000;
+const port = process.env.PORT || 5000; 
 
 // =====================================================
 // GEMINI AI
@@ -358,11 +358,11 @@ app.post("/api/try-on", async (req, res) => {
         "We couldn't prepare this jersey for AI Try-On. Please try another product.";
     }
 
-    res.status(500).json({
+        res.status(500).json({
       error: userFriendlyError,
     });
   }
-
+});
 // =====================================================
 // START SERVER
 // =====================================================

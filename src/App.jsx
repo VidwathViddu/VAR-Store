@@ -121,7 +121,9 @@ function App() {
         {/* Main Content */}
         <div className="relative z-10">
 
-          <AIManager key={restartTutorial ? "restart-1" : "restart-0"} />
+          <AIManager
+            restartTutorial={restartTutorial}
+          />
 
           <Navbar
             cartCount={cart.reduce(

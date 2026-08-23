@@ -19,7 +19,13 @@ function AIPicks({ handleAddToCart }) {
     );
 
     const sortedProducts = [...filteredProducts].sort(
-      (a, b) => b.rating - a.rating
+      (a, b) => {
+        if (b.rating !== a.rating) {
+          return b.rating - a.rating;
+        }
+
+        return a.price - b.price;
+      }
     );
     let message = "🤖 Here are the best matches for you";
 
@@ -117,6 +123,9 @@ function AIPicks({ handleAddToCart }) {
             <h2 className="mb-3 text-center text-3xl font-black md:text-4xl">
               Recommended for You ✨
             </h2>
+            <p className="mb-2 text-center text-sm text-emerald-400">
+              {recommendations.length} matches found
+            </p>
             <p className="mb-8 text-center text-slate-400">
               {recommendationMessage}
             </p>
