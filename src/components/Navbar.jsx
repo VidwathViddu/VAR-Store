@@ -1,3 +1,4 @@
+import logo from "../assets/var-store-logo.png";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
@@ -47,11 +48,16 @@ function Navbar({ cartCount, handleRestartTutorial }) {
           <Link
             to="/"
             onClick={closeMenu}
-            className="text-xl font-bold tracking-tight text-white transition hover:text-emerald-400 sm:text-2xl"
+            className="flex items-center gap-2"
           >
-            VAR Store{" "}
-            <span className="text-emerald-400">
-              ⚽
+            <img
+              src={logo}
+              alt="VAR Store"
+              className="h-10 w-10 rounded-full object-cover"
+            />
+
+            <span className="text-xl font-black tracking-tight text-white sm:text-2xl">
+              VAR Store
             </span>
           </Link>
 
