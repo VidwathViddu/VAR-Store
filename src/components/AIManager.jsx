@@ -157,6 +157,7 @@ function AIManager({ restartTutorial }) {
       "tour-jerseys": "mobile-tour-jerseys",
       "tour-boots": "mobile-tour-boots",
       "tour-ai-picks": "mobile-tour-ai-picks",
+      "tour-cart": "mobile-tour-cart",
     };
 
     const actualTargetId =
@@ -170,7 +171,8 @@ function AIManager({ restartTutorial }) {
 
     if (
       isMobile &&
-      mobileTargetMap[targetId]
+      mobileTargetMap[targetId] &&
+      targetId !== "tour-cart"
     ) {
       setMobileTourMenu(true);
     } else {
@@ -450,7 +452,13 @@ function AIManager({ restartTutorial }) {
               DIALOGUE BOX
           ====================================== */}
 
-          <div className="pointer-events-auto absolute bottom-6 left-1/2 z-[110] flex w-[min(960px,calc(100vw-3rem))] -translate-x-1/2 overflow-hidden rounded-3xl border border-emerald-400/50 bg-slate-950/95 shadow-2xl shadow-black/70 backdrop-blur-xl">
+          <div
+            className={`pointer-events-auto absolute left-1/2 z-[110] flex w-[min(960px,calc(100vw-3rem))] -translate-x-1/2 overflow-hidden rounded-3xl border border-emerald-400/50 bg-slate-950/95 shadow-2xl shadow-black/70 backdrop-blur-xl ${
+              currentTargetId === "tour-manager"
+                ? "top-6 bottom-auto md:bottom-6 md:top-auto"
+                : "bottom-6"
+            }`}
+          >
 
             {/* ==================================
                 DESKTOP MANAGER IMAGE
@@ -571,7 +579,11 @@ function AIManager({ restartTutorial }) {
             setIsChatOpen(true);
           }
         }}
-        className="fixed bottom-6 right-6 z-[90] h-16 w-16 overflow-hidden rounded-full border-2 border-emerald-400 bg-slate-950 shadow-2xl shadow-emerald-500/30 transition hover:scale-110"
+        className={`fixed bottom-6 right-6 h-16 w-16 overflow-hidden rounded-full border-2 border-emerald-400 bg-slate-950 shadow-2xl shadow-emerald-500/30 transition hover:scale-110 ${
+          showTutorial && currentTargetId === "tour-manager"
+            ? "z-[120]"
+            : "z-[90]"
+        }`}
         title="Talk to VAR Manager"
       >
 
