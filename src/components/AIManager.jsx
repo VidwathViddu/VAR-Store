@@ -333,7 +333,7 @@ function AIManager({ restartTutorial }) {
 
     try {
       const response = await fetch(
-        "http://localhost:5000/api/manager",
+        "https://var-store.onrender.com/api/manager",
         {
           method: "POST",
 

@@ -126,7 +126,7 @@ function ProductDetails({ handleAddToCart }) {
         await convertFileToBase64(userImage);
 
       const response = await fetch(
-        "http://localhost:5000/api/try-on",
+        "https://var-store.onrender.com/api/try-on",
         {
           method: "POST",
 
