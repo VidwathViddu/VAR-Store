@@ -39,63 +39,67 @@ app.get("/", (req, res) => {
 
 app.post("/api/manager", async (req, res) => {
   try {
-    const { message, products } = req.body;
+    const { message, products = [] } = req.body;
 
-    if (!message) {
+    if (!message?.trim()) {
       return res.status(400).json({
         error: "Please provide a message.",
       });
     }
 
     const productCatalog = products
-      .map(
-        (product) =>
-          `ID: ${product.id} | ${product.name} | Category: ${product.category} | Price: ₹${product.price} | Rating: ${product.rating}`
-      )
+      .map((product) => {
+        return [
+          `ID: ${product.id}`,
+          `Name: ${product.name}`,
+          `Category: ${product.category}`,
+          `Price: ₹${product.price}`,
+          `Rating: ${product.rating}`,
+        ].join(" | ");
+      })
       .join("\n");
 
     const response = await ai.models.generateContent({
       model: "gemini-3.5-flash-lite",
 
-      contents: message,
+      contents: message.trim(),
 
       config: {
         systemInstruction: `
 You are VAR Manager, a friendly and enthusiastic AI shopping assistant
 for VAR Store, a premium football merchandise store.
 
-You help users choose products from the ACTUAL VAR Store catalog below.
+You help users choose products ONLY from the actual VAR Store catalogue below.
 
 ACTUAL PRODUCT CATALOG:
 ${productCatalog}
 
 STRICT RULES:
-- Recommend ONLY products from the catalog above.
-- Never invent products, prices, ratings, stock availability, sizes, colours, or discounts.
+- Recommend ONLY products from the catalogue.
+- Never invent products, prices, ratings, stock, sizes, colours, or discounts.
 - When recommending a product, mention its exact name and price.
 - Use ratings when helpful.
-- If the requested product does not exist in the catalog, clearly say it is not currently available.
-- You may suggest the closest available alternative from the catalog.
+- If a requested product does not exist, clearly say it is not currently available.
+- You may suggest the closest available alternative.
 - Be conversational, helpful, and concise.
-- Keep answers under 120 words.
-`,
+- Keep every answer under 120 words.
+        `.trim(),
       },
     });
 
-    res.json({
-      reply: response.text,
+    return res.json({
+      reply: response.text?.trim() || "Sorry, I couldn't generate a response.",
     });
   } catch (error) {
     console.error("Gemini AI Error:", error);
 
-    res.status(500).json({
+    return res.status(500).json({
       error:
         error.message ||
         "Something went wrong with the AI Manager.",
     });
   }
 });
-
 // =====================================================
 // AI TRY-ON
 // IDM-VTON
